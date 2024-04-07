@@ -65,9 +65,12 @@ fn main() {
 
                 //GUESSING LOOP
                 loop {
-
-                    //GETS USER INPUT
-                    println!("Enter a letter or guess the entire word: {}",hidden_word);
+                    
+                    //GAME PROGRESS INFO
+                    println!("Hidden word: {}", hidden_word);
+                    println!("Attempts left: {}", attempts);
+                    println!("Enter a letter or guess the entire word:");
+                    //GET USER INPUT
                     let mut guess = String::new().to_lowercase();
                     io::stdin().read_line(&mut guess).expect("Failed to read line");
 
@@ -87,7 +90,7 @@ fn main() {
                                     hidden_word.replace_range(i..=i, &c.to_string());
                                 }
                             }
-                            println!("Correct guess! Current word: {}", hidden_word);
+                            println!("Correct guess!");
 
                             //CHECK IF THE ENTIRE WORD HAS BEEN REVEALED
                             if hidden_word == revealed_word {
@@ -99,17 +102,15 @@ fn main() {
                             //INCORRECT LETTER GUESS
                             println!("Incorrect guess!");
                             attempts -= 1;
-                            println!("Attempts left: {}", attempts);
                             if attempts == 0 {
                                 println!("Game over! The word was: {}", revealed_word);
                                 break;
                             }
                         }
                     } else {
-                        //INCORRECT WORD GUESS
+                        //INCORRECT WHOLE WORD GUESS
                         println!("Incorrect guess!");
                         attempts -= 1;
-                        println!("Attempts left: {}", attempts);
                         if attempts == 0 {
                             println!("Game over! The word was: {}", revealed_word);
                             break;
@@ -123,13 +124,13 @@ fn main() {
             }
         }
 
-        //FINISHES THE GAME IF ALL WORDS FROM THE FILE BEEN USED
+        //GAME IS OVER IF ALL WORDS FROM THE FILE HAVE BEEN USED
         if fruits.len() == 0 {
             println!("You have finished the game, well done you, now go play outside!");
             break;
         }
 
-        //OFFERS TO PLAY AGAIN OF FINISH THE GAME
+        //OFFERS TO PLAY AGAIN OR FINISH THE GAME
         let mut play_again = String::new();
         loop {
             play_again.clear();
